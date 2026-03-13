@@ -1,9 +1,16 @@
 
 const gameboard = (()=>{
 
-    return {}
+    let array =  [[],[],[]]
+
+    return {array}
 
 })();
+
+const player = function () {
+    
+}
+
 /*
 Todo 
 gameboard as an array on GB object
