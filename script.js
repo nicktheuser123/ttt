@@ -1,15 +1,50 @@
 
 const gameboard = (()=>{
 
-    let array =  [[],[],[]]
+    let board =  [[],[],[]]
 
-    return {array}
+    const getBoard = () => board;
+    
+    const clearBoard = (board) => {
+        board = [[],[],[]];
+    }
+
+    return {board, getBoard, clearBoard}
 
 })();
 
-const player = function () {
-    
+const player = function (name) {
+    const score = 0;
+
+    return {name, score}
 }
+
+const game = function (player1, player2) {
+    let board;
+
+    const start = function (){        
+        board = gameboard.getBoard()
+        gameboard.clearBoard(board);
+
+        return board;
+    }
+
+
+    const turn = function (player, positionX, positionY, board){
+
+        console.log(board);
+    }
+
+    return {start, turn}
+}
+
+
+const p1 = player("Ronny");
+
+const p2 = player("Yotty");
+
+const board = game.start(p1,p2)
+console.log(board);
 
 /*
 Todo 
