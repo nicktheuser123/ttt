@@ -1,7 +1,8 @@
 
 const gameboard = (()=>{
 
-    let board =  [[],[],[]]
+    // let board =  [[],[],[]] ;
+        let board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
 
     const getBoard = () => board;
     
@@ -13,38 +14,48 @@ const gameboard = (()=>{
 
 })();
 
-const player = function (name) {
+const player = function (name, symbol) {
     const score = 0;
-
-    return {name, score}
+    
+    return {name, score, symbol}
 }
 
 const game = function (player1, player2) {
     let board;
-
+    console.log("in game")
     const start = function (){        
         board = gameboard.getBoard()
+        
         gameboard.clearBoard(board);
-
+        console.log("in start",board)
         return board;
     }
 
+    const checkWin = function (board){
+        let count = 0;
 
-    const turn = function (player, positionX, positionY, board){
+    
 
-        console.log(board);
+        console.log("checkWin", board);
     }
 
-    return {start, turn}
+    const turn = function (player, positionX, positionY, board){
+        board[positionY][positionX].push(player.symbol);        
+
+        console.log("Turn", board);
+    }
+
+    return {start, turn, checkWin}
 }
 
 
-const p1 = player("Ronny");
+const p1 = player("Ronny", "X");
 
-const p2 = player("Yotty");
+const p2 = player("Yotty", "O");
 
-const board = game.start(p1,p2)
-console.log(board);
+const game1 = game(p1,p2);
+game1.start();
+// console.log(board);
 
 /*
 Todo 
