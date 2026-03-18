@@ -7,7 +7,8 @@ const gameboard = (()=>{
     const getBoard = () => board;
     
     const clearBoard = (board) => {
-        board = [[],[],[]];
+        // board = [[],[],[]];
+        board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
     }
 
     return {board, getBoard, clearBoard}
@@ -33,15 +34,51 @@ const game = function (player1, player2) {
 
     const checkWin = function (board){
         let count = 0;
-
-    
+        
+        checkRow("X",board);
+        checkRow("Y",board);
+        //check for x first then o ?
+        //check rows first
+        //check collumns
+        
 
         console.log("checkWin", board);
     }
 
+    const checkRow = function (symbol,board) {
+        let win = false;        
+
+        for (const row of board) {
+            let i = 0; 
+            
+            for (const item of row) {
+                if (item[0] = symbol) i++;
+            
+            }
+            if (i === 3){                
+                win = true;
+                console.log("YOU WON")
+                break;
+            } 
+                
+
+        };
+
+    };
+
+    const checkCol = function (symbol) {
+
+        
+    };
+
+    const checkDiagonal = function (symbol) {
+
+        
+    };
+
     const turn = function (player, positionX, positionY, board){
         board[positionY][positionX].push(player.symbol);        
-
+        //how do I get the board?
         console.log("Turn", board);
     }
 
@@ -73,7 +110,5 @@ game end logic
 3 in a rows and ties
 
 Rest dom and ui related tasks 
-
-
 
 */
