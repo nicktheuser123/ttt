@@ -34,15 +34,14 @@ const game = function (player1, player2) {
 
     const checkWin = function (board){
         let count = 0;
+        console.log("Inside checkWin", board);
         
-        checkRow("X",board);
-        checkRow("Y",board);
-        //check for x first then o ?
+        checkRow("X", board);
+        // checkRow("O", board);
+        //check for x first then o?
         //check rows first
-        //check collumns
-        
+        //check collumns        
 
-        console.log("checkWin", board);
     }
 
     const checkRow = function (symbol,board) {
@@ -50,8 +49,9 @@ const game = function (player1, player2) {
 
         for (const row of board) {
             let i = 0; 
-            
+            console.log("IN F1 - ITEM", row);
             for (const item of row) {
+            console.log("IN F2 - ITEM", item);
                 if (item[0] = symbol) i++;
             
             }
@@ -77,9 +77,11 @@ const game = function (player1, player2) {
     };
 
     const turn = function (player, positionX, positionY, board){
+        console.log("PLAYER",positionX)
         board[positionY][positionX].push(player.symbol);        
         //how do I get the board?
         console.log("Turn", board);
+        checkWin(board);
     }
 
     return {start, turn, checkWin}
@@ -91,7 +93,12 @@ const p1 = player("Ronny", "X");
 const p2 = player("Yotty", "O");
 
 const game1 = game(p1,p2);
-game1.start();
+let currentBoard = game1.start();
+game1.turn(p1, 0, 0, currentBoard);
+
+
+
+
 // console.log(board);
 
 /*
