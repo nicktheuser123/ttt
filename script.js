@@ -37,7 +37,9 @@ const game = function (player1, player2) {
         console.log("Inside checkWin", board);
         
         checkRow("X", board);
-        // checkRow("O", board);
+        checkRow("O", board);
+        checkCol("O", board);
+        checkCol("X", board);
         //check for x first then o?
         //check rows first
         //check collumns        
@@ -48,25 +50,57 @@ const game = function (player1, player2) {
         let win = false;        
 
         for (const row of board) {
-            let i = 0; 
-            console.log("IN F1 - ITEM", row);
+            let i = 0; //for row check
+           
+            // console.log("IN F1 - ITEM", row);
             for (const item of row) {
-            console.log("IN F2 - ITEM", item);
-                if (item[0] = symbol) i++;
-            
+            //  console.log("IN F2 - ITEM", item);
+                 if (item[0] === symbol) i++;
+                
+           
             }
             if (i === 3){                
                 win = true;
                 console.log("YOU WON")
                 break;
-            } 
-                
+            }                 
 
         };
 
     };
 
     const checkCol = function (symbol) {
+        let win = false;
+        let i = 0;
+        for (let x = 0; x < 3; x++ ) {
+
+            for (let y=0; y<3; y++) {
+             if (board[x][y] === symbol) {
+                i++ ;
+                win = true
+                console.log("YOU WON!!!!!!!!!")
+                break                            
+             }
+            }
+        }
+
+
+
+         for ( const row of board) {
+            let i = 0; 
+            // console.log("IN F1 - ITEM", row);
+            for (const item of row) {
+            //  console.log("IN F2 - ITEM", item);
+                 if (item[0] === symbol) i++;
+            
+            }
+            if (i === 3){                
+                win = true;
+                console.log("YOU WON")
+                break;
+            }                 
+
+        };
 
         
     };
@@ -95,7 +129,13 @@ const p2 = player("Yotty", "O");
 const game1 = game(p1,p2);
 let currentBoard = game1.start();
 game1.turn(p1, 0, 0, currentBoard);
+game1.turn(p2, 1, 1, currentBoard);
 
+game1.turn(p1, 0, 1, currentBoard);
+game1.turn(p2, 2, 1, currentBoard);
+
+game1.turn(p1, 0, 2, currentBoard);
+// game1.turn(p2, 0, 1, currentBoard);
 
 
 
