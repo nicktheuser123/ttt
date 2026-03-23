@@ -40,10 +40,6 @@ const game = function (player1, player2) {
         checkRow("O", board);
         checkCol("O", board);
         checkCol("X", board);
-        //check for x first then o?
-        //check rows first
-        //check collumns        
-
     }
 
     const checkRow = function (symbol,board) {
@@ -56,8 +52,7 @@ const game = function (player1, player2) {
             for (const item of row) {
             //  console.log("IN F2 - ITEM", item);
                  if (item[0] === symbol) i++;
-                
-           
+                           
             }
             if (i === 3){                
                 win = true;
@@ -69,38 +64,26 @@ const game = function (player1, player2) {
 
     };
 
-    const checkCol = function (symbol) {
+    const checkCol = function (symbol,board) {
         let win = false;
         let i = 0;
         for (let x = 0; x < 3; x++ ) {
-
+            
             for (let y=0; y<3; y++) {
-             if (board[x][y] === symbol) {
+            // console.log("BOARD", board[x][y])
+                if (board[x][y][0] === symbol) {
                 i++ ;
-                win = true
-                console.log("YOU WON!!!!!!!!!")
-                break                            
+                // console.log("I in CC", i)
+                  
              }
             }
-        }
-
-
-
-         for ( const row of board) {
-            let i = 0; 
-            // console.log("IN F1 - ITEM", row);
-            for (const item of row) {
-            //  console.log("IN F2 - ITEM", item);
-                 if (item[0] === symbol) i++;
-            
+            if (i===3){
+                win = true
+                console.log("YOU WON!!!!!!!!!")
+                break                          
             }
-            if (i === 3){                
-                win = true;
-                console.log("YOU WON")
-                break;
-            }                 
 
-        };
+        }
 
         
     };
