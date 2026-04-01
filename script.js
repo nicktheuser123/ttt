@@ -36,9 +36,9 @@ const game = function (player1, player2) {
         let count = 0;
         console.log("Inside checkWin", board);
         
-        checkRow("X", board);
-        checkRow("O", board);
-        checkCol("O", board);
+        // checkRow("X", board);
+        // checkRow("O", board);
+        // checkCol("O", board);
         checkCol("X", board);
     }
 
@@ -66,20 +66,20 @@ const game = function (player1, player2) {
 
     const checkCol = function (symbol,board) {
         let win = false;
-        let i = 0;
         for (let x = 0; x < 3; x++ ) {
+            let i = 0;
             
             for (let y=0; y<3; y++) {
-            // console.log("BOARD", board[x][y])
-                if (board[x][y][0] === symbol) {
+            //  console.log(`BOARD value ${board[y][x]}, X = ${x}, Y = ${y}`)
+                if (board[y][x][0] === symbol) {
                 i++ ;
-                // console.log("I in CC", i)
+            //  console.log("I in CC", i)
                   
              }
             }
             if (i===3){
                 win = true
-                console.log("YOU WON!!!!!!!!!")
+                console.log(`YOU WON!!!!!!!!! ${symbol}`);
                 break                          
             }
 
@@ -117,7 +117,7 @@ game1.turn(p2, 1, 1, currentBoard);
 game1.turn(p1, 0, 1, currentBoard);
 game1.turn(p2, 2, 1, currentBoard);
 
-game1.turn(p1, 0, 2, currentBoard);
+game1.turn(p1, 2, 2, currentBoard);
 // game1.turn(p2, 0, 1, currentBoard);
 
 
