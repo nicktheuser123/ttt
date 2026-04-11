@@ -36,10 +36,12 @@ const game = function (player1, player2) {
         let count = 0;
         console.log("Inside checkWin", board);
         
-        // checkRow("X", board);
-        // checkRow("O", board);
-        // checkCol("O", board);
-        checkCol("X", board);
+         checkRow("X", board);
+         checkRow("O", board);
+         checkCol("O", board);
+         checkCol("X", board);
+         checkDiagonal("O", board);
+         checkDiagonal("X", board);
     }
 
     const checkRow = function (symbol,board) {
@@ -88,8 +90,35 @@ const game = function (player1, player2) {
         
     };
 
-    const checkDiagonal = function (symbol) {
+    const checkDiagonal = function (symbol, board) {
+        let win = false;
+        let i = 0;
+        //simplified hardcoded check
+        //check diagonal top left to bot right
 
+        for(x=0; x<3; x++){
+            if (board[x][x][0] === symbol) i++;                                    
+        }
+        
+        if (i===3){
+            console.log(`YOU WON!!!!!!!!! ${symbol}`);
+            return win = true                                                          
+        }
+        
+        // reset 
+        i=0;
+
+        //check diagonal bot left to top right
+        let y = 2;
+        for(x=0; x<3; x++){
+            if (board[x][y][0] === symbol) i++;                                    
+            y--
+        }
+            
+        if (i===3){
+              console.log(`YOU WON!!!!!!!!! ${symbol}`);
+              return win = true                                          
+            }                               
         
     };
 
@@ -111,21 +140,34 @@ const p2 = player("Yotty", "O");
 
 const game1 = game(p1,p2);
 let currentBoard = game1.start();
-game1.turn(p1, 0, 0, currentBoard);
+
+//diagonal top left to bot right
+game1.turn(p1, 0, 1, currentBoard);
+game1.turn(p2, 0, 0, currentBoard);
+
+game1.turn(p1, 2, 0, currentBoard);
 game1.turn(p2, 1, 1, currentBoard);
 
-game1.turn(p1, 0, 1, currentBoard);
-game1.turn(p2, 2, 1, currentBoard);
+game1.turn(p1, 2, 1, currentBoard);
+game1.turn(p2, 2, 2, currentBoard);
 
-game1.turn(p1, 2, 2, currentBoard);
-// game1.turn(p2, 0, 1, currentBoard);
 
+//diagonal bot left to top right
+// game1.turn(p1, 0, 1, currentBoard);
+// game1.turn(p2, 2, 0, currentBoard);
+
+// game1.turn(p1, 2, 0, currentBoard);
+// game1.turn(p2, 1, 1, currentBoard);
+
+// game1.turn(p1, 2, 1, currentBoard);
+// game1.turn(p2, 0, 2, currentBoard);
 
 
 // console.log(board);
 
 /*
 Todo 
+
 gameboard as an array on GB object
 
 players also on objects
@@ -140,5 +182,8 @@ game end logic
 3 in a rows and ties
 
 Rest dom and ui related tasks 
+
+low prio 
+- make the board using for loops not static array
 
 */
