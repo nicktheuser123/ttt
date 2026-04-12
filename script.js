@@ -1,14 +1,28 @@
 
 const gameboard = (()=>{
 
-    // let board =  [[],[],[]] ;
-        let board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
+    let board =  [] ;
+    
+    const setBoard = (board) => {
+
+        for (let x = 0; x<3; x++){
+            board.push([]);
+            for(let y = 0; y<3; y++){
+                board[x].push([])
+            }        
+        }
+    }
+    setBoard(board);
+
+        // let board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
 
     const getBoard = () => board;
     
     const clearBoard = (board) => {
         // board = [[],[],[]];
-        board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
+        // board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
+        board = [];
+        setBoard(board);
     }
 
     return {board, getBoard, clearBoard}
@@ -151,7 +165,8 @@ game1.turn(p2, 1, 1, currentBoard);
 game1.turn(p1, 2, 1, currentBoard);
 game1.turn(p2, 2, 2, currentBoard);
 
-
+const game2 = game(p1,p2);
+ currentBoard = game2.start();
 //diagonal bot left to top right
 // game1.turn(p1, 0, 1, currentBoard);
 // game1.turn(p2, 2, 0, currentBoard);
@@ -168,17 +183,17 @@ game1.turn(p2, 2, 2, currentBoard);
 /*
 Todo 
 
-gameboard as an array on GB object
+done - gameboard as an array on G B object
 
-players also on objects
+done - players also on objects
 
-game object to control the flow of the game
+done - game object to control the flow of the game
 
 rules
 1 no global code
 
 Get it to work in console first
-game end logic
+done - game end logic 
 3 in a rows and ties
 
 Rest dom and ui related tasks 
