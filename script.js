@@ -1,13 +1,14 @@
 
 const gameboard = (()=>{
-
-    let board =  [] ;
+    let rows = 3;
+    let columns = 3;
+    let board = [] ;
     
     const setBoard = (board) => {
 
-        for (let x = 0; x<3; x++){
+        for (let x = 0; x < rows; x++){
             board.push([]);
-            for(let y = 0; y<3; y++){
+            for(let y = 0; y < columns; y++){
                 board[x].push([])
             }        
         }
@@ -19,10 +20,14 @@ const gameboard = (()=>{
     const getBoard = () => board;
     
     const clearBoard = (board) => {
+        console.log("IN Clear Board p1 ", board );
         // board = [[],[],[]];
         // board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
         board = [];
+        console.log("IN Clear Board p2", board);
+
         setBoard(board);
+        console.log("IN Clear Board p3", board)
     }
 
     return {board, getBoard, clearBoard}
@@ -182,7 +187,7 @@ const game2 = game(p1,p2);
 
 /*
 Todo 
-
+game board not clearing
 done - gameboard as an array on G B object
 
 done - players also on objects
