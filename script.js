@@ -1,5 +1,5 @@
 
-const gameboard = (()=>{
+const gameboard = (() => {
     let rows = 3;
     let columns = 3;
     let board = [] ;
@@ -13,24 +13,19 @@ const gameboard = (()=>{
             }        
         }
     }
-    setBoard(board);
-
-        // let board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
-
+    
     const getBoard = () => board;
     
     const clearBoard = (board) => {
-        console.log("IN Clear Board p1 ", board );
-        // board = [[],[],[]];
-        // board =  [[[],[],[]],[[],[],[]],[[],[],[]]] ;
-        board = [];
-        console.log("IN Clear Board p2", board);
+        // console.log("IN Clear Board p1 ", board );
+        board.length = 0;
+        // console.log("IN Clear Board p2", board);
 
         setBoard(board);
-        console.log("IN Clear Board p3", board)
+        // console.log("IN Clear Board p3", board)
     }
 
-    return {board, getBoard, clearBoard}
+    return {board, getBoard, clearBoard, setBoard}
 
 })();
 
@@ -44,10 +39,12 @@ const game = function (player1, player2) {
     let board;
     console.log("in game")
     const start = function (){        
+        
         board = gameboard.getBoard()
+        gameboard.setBoard(board)
         
         gameboard.clearBoard(board);
-        console.log("in start",board)
+        
         return board;
     }
 
@@ -172,6 +169,7 @@ game1.turn(p2, 2, 2, currentBoard);
 
 const game2 = game(p1,p2);
  currentBoard = game2.start();
+ 
 //diagonal bot left to top right
 // game1.turn(p1, 0, 1, currentBoard);
 // game1.turn(p2, 2, 0, currentBoard);
