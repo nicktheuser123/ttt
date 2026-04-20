@@ -30,9 +30,25 @@ const gameboard = (() => {
 })();
 
 const player = function (name, symbol) {
-    const score = 0;
+    const score = 0;    
+
+    const getScore = () => score;
     
-    return {name, score, symbol}
+    const resetScore = (score) => {         
+        score = 0;
+    }
+
+    const incrementScore = (score) => {         
+        console.log ("Inside Score increment",score);
+        score++
+
+        if(score === 3) {
+            console.log ("Game Complete")
+            resetScore(score);
+        }
+    }
+
+    return {name, getScore, symbol, score, incrementScore, resetScore}
 }
 
 const game = function (player1, player2) {
@@ -41,23 +57,20 @@ const game = function (player1, player2) {
     const start = function (){        
         
         board = gameboard.getBoard()
-        gameboard.setBoard(board)
-        
+        gameboard.setBoard(board)        
         gameboard.clearBoard(board);
         
         return board;
     }
 
-    const checkWin = function (board){
-        let count = 0;
+    const checkWin = function (board,player){
+        
         console.log("Inside checkWin", board);
         
-         checkRow("X", board);
-         checkRow("O", board);
-         checkCol("O", board);
-         checkCol("X", board);
-         checkDiagonal("O", board);
-         checkDiagonal("X", board);
+         if (checkRow("X", board) || checkCol("X", board) || checkDiagonal("X", board))  player.incrementScore(player.getScore)
+         if (checkRow("O", board) || checkCol("O", board) || checkDiagonal("O", board))  player.incrementScore(player.getScore)
+                
+
     }
 
     const checkRow = function (symbol,board) {
@@ -98,7 +111,8 @@ const game = function (player1, player2) {
             if (i===3){
                 win = true
                 console.log(`YOU WON!!!!!!!!! ${symbol}`);
-                break                          
+                return win;
+                // break                          
             }
 
         }
@@ -118,7 +132,7 @@ const game = function (player1, player2) {
         
         if (i===3){
             console.log(`YOU WON!!!!!!!!! ${symbol}`);
-            return win = true                                                          
+            return true                                                          
         }
         
         // reset 
@@ -133,7 +147,7 @@ const game = function (player1, player2) {
             
         if (i===3){
               console.log(`YOU WON!!!!!!!!! ${symbol}`);
-              return win = true                                          
+              return true                                          
             }                               
         
     };
@@ -143,7 +157,7 @@ const game = function (player1, player2) {
         board[positionY][positionX].push(player.symbol);        
         //how do I get the board?
         console.log("Turn", board);
-        checkWin(board);
+        checkWin(board,player);
     }
 
     return {start, turn, checkWin}
@@ -167,8 +181,8 @@ game1.turn(p2, 1, 1, currentBoard);
 game1.turn(p1, 2, 1, currentBoard);
 game1.turn(p2, 2, 2, currentBoard);
 
-const game2 = game(p1,p2);
- currentBoard = game2.start();
+// const game2 = game(p1,p2);
+//  currentBoard = game2.start();
  
 //diagonal bot left to top right
 // game1.turn(p1, 0, 1, currentBoard);
@@ -185,7 +199,7 @@ const game2 = game(p1,p2);
 
 /*
 Todo 
-game board not clearing
+
 done - gameboard as an array on G B object
 
 done - players also on objects
