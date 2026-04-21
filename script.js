@@ -25,18 +25,19 @@ const gameboard = (() => {
         // console.log("IN Clear Board p3", board)
     }
 
-    return {board, getBoard, clearBoard, setBoard}
+    return { getBoard, clearBoard, setBoard}
 
 })();
 
 const player = function (name, symbol) {
-    const score = 0;    
-
+    let score = 0;    
+    
     const getScore = () => score;
     
     const resetScore = (score) => {         
         score = 0;
     }
+
 
     const incrementScore = (score) => {         
         console.log ("Inside Score increment",score);
@@ -51,9 +52,13 @@ const player = function (name, symbol) {
     return {name, getScore, symbol, score, incrementScore, resetScore}
 }
 
-const game = function (player1, player2) {
+
+//Controls the turns, checks for wins etc
+
+
+const gameController = function (player1, player2) {
     let board;
-    console.log("in game")
+    console.log("in gameController")
     const start = function (){        
         
         board = gameboard.getBoard()
@@ -64,12 +69,21 @@ const game = function (player1, player2) {
     }
 
     const checkWin = function (board,player){
-        
+        let tie = true;
         console.log("Inside checkWin", board);
         
-         if (checkRow("X", board) || checkCol("X", board) || checkDiagonal("X", board))  player.incrementScore(player.getScore)
-         if (checkRow("O", board) || checkCol("O", board) || checkDiagonal("O", board))  player.incrementScore(player.getScore)
-                
+         if (checkRow("X", board) || checkCol("X", board) || checkDiagonal("X", board)) player.incrementScore(player.getScore())
+         if (checkRow("O", board) || checkCol("O", board) || checkDiagonal("O", board)) player.incrementScore(player.getScore())
+         
+        for (let x = 0; x < 3; x++){            
+            for(let y = 0; y < 3; y++){
+                if (board[x][y].length === 0) {
+                    tie = false
+                }                
+            }        
+        }
+
+        if(tie) console.log("TIE");
 
     }
 
@@ -168,20 +182,21 @@ const p1 = player("Ronny", "X");
 
 const p2 = player("Yotty", "O");
 
-const game1 = game(p1,p2);
+const game1 = gameController(p1,p2);
 let currentBoard = game1.start();
 
 //diagonal top left to bot right
-game1.turn(p1, 0, 1, currentBoard);
-game1.turn(p2, 0, 0, currentBoard);
+game1.turn(p1, 0, 0, currentBoard); // X
+game1.turn(p2, 1, 1, currentBoard); // O
+game1.turn(p1, 2, 0, currentBoard); // X
+game1.turn(p2, 1, 0, currentBoard); // O
+game1.turn(p1, 1, 2, currentBoard); // X
+game1.turn(p2, 0, 1, currentBoard); // O
+game1.turn(p1, 2, 1, currentBoard); // X
+game1.turn(p2, 2, 2, currentBoard); // O
+game1.turn(p1, 0, 2, currentBoard); // X
 
-game1.turn(p1, 2, 0, currentBoard);
-game1.turn(p2, 1, 1, currentBoard);
-
-game1.turn(p1, 2, 1, currentBoard);
-game1.turn(p2, 2, 2, currentBoard);
-
-// const game2 = game(p1,p2);
+// const game2 = gameController(p1,p2);
 //  currentBoard = game2.start();
  
 //diagonal bot left to top right
