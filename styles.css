@@ -1,0 +1,22 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.board-container {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 20px;
+
+}
+
+.row{
+    display: flex;
+    gap: 20px;
+}
+
+button{
+    padding: 40px;
+}

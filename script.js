@@ -53,8 +53,8 @@ const player = function (name, symbol) {
 }
 
 
-//Controls the turns, checks for wins etc
 
+//Controls the turns, checks for wins etc
 
 const gameController = function (player1, player2) {
     let board;
@@ -75,7 +75,7 @@ const gameController = function (player1, player2) {
          if (checkRow("X", board) || checkCol("X", board) || checkDiagonal("X", board)) player.incrementScore(player.getScore())
          if (checkRow("O", board) || checkCol("O", board) || checkDiagonal("O", board)) player.incrementScore(player.getScore())
          
-        for (let x = 0; x < 3; x++){            
+         for (let x = 0; x < 3; x++){            
             for(let y = 0; y < 3; y++){
                 if (board[x][y].length === 0) {
                     tie = false
@@ -177,6 +177,16 @@ const gameController = function (player1, player2) {
     return {start, turn, checkWin}
 }
 
+    gameController = (()=>{
+
+
+
+
+
+
+    })()
+
+
 
 const p1 = player("Ronny", "X");
 
@@ -214,23 +224,13 @@ game1.turn(p1, 0, 2, currentBoard); // X
 
 /*
 Todo 
+add switch round logic, to change the players and then simplify check win logic
 
-done - gameboard as an array on G B object
+dynamically generate UI with coordinate ids
+-event listeners on each button
+Then when button is pressed, extract data attributes containing coordinates
+Then call the turn function
 
-done - players also on objects
-
-done - game object to control the flow of the game
-
-rules
-1 no global code
-
-Get it to work in console first
-done - game end logic 
-3 in a rows and ties
-
-Rest dom and ui related tasks 
-
-low prio 
-- make the board using for loops not static array
+nice to have
 
 */
