@@ -177,34 +177,66 @@ const gameController = function (player1, player2) {
     return {start, turn, checkWin}
 }
 
-    gameController = (()=>{
+const screenController = (()=>{
+    
+    const p1 = player("Ronny", "X");
+    const p2 = player("Yotty", "O");
+
+    const game1 = gameController(p1,p2);
+    const currentBoard = game1.start();
+    
+
+    const renderScreen = (board) => {
+
+        const boardElement = document.getElementsByClassName("board-container")[0];
+        // console.log(boardElement)
+        for (let x = 0; x < 3; x++){
+            const rowDiv = document.createElement('div');
+            rowDiv.classList.add(`row-${x}`);
+            rowDiv.setAttribute("data-id",x);            
+
+            for(let y = 0; y < 3; y++){
+                createButton(x, y ," ", rowDiv);                
+            }        
+            // console.log()
+            boardElement.appendChild(rowDiv)
+        }
+
+    };
+
+    renderScreen(currentBoard);
+
+    function createButton(x,y, text, parent){
+        // console.log("increate!")
+        const button = document.createElement('button');
+        button.classList.add(`cell`);
+        // console.log("parent",parent)
+        button.setAttribute("data-id-x",x);
+        button.setAttribute("data-id-x",y);
+        if(text) button.textContent = text; 
+        if(parent) parent.appendChild(button);
+        button.addEventListener('click', (e)=>{
+        game1.turn(p1, e.target.dataset.id , e.target.dataset.id, currentBoard);
+        })
+        return button;
+    }   
 
 
+})()
 
 
-
-
-    })()
-
-
-
-const p1 = player("Ronny", "X");
-
-const p2 = player("Yotty", "O");
-
-const game1 = gameController(p1,p2);
-let currentBoard = game1.start();
+screenController()
 
 //diagonal top left to bot right
-game1.turn(p1, 0, 0, currentBoard); // X
-game1.turn(p2, 1, 1, currentBoard); // O
-game1.turn(p1, 2, 0, currentBoard); // X
-game1.turn(p2, 1, 0, currentBoard); // O
-game1.turn(p1, 1, 2, currentBoard); // X
-game1.turn(p2, 0, 1, currentBoard); // O
-game1.turn(p1, 2, 1, currentBoard); // X
-game1.turn(p2, 2, 2, currentBoard); // O
-game1.turn(p1, 0, 2, currentBoard); // X
+// game1.turn(p1, 0, 0, currentBoard); // X
+// game1.turn(p2, 1, 1, currentBoard); // O
+// game1.turn(p1, 2, 0, currentBoard); // X
+// game1.turn(p2, 1, 0, currentBoard); // O
+// game1.turn(p1, 1, 2, currentBoard); // X
+// game1.turn(p2, 0, 1, currentBoard); // O
+// game1.turn(p1, 2, 1, currentBoard); // X
+// game1.turn(p2, 2, 2, currentBoard); // O
+// game1.turn(p1, 0, 2, currentBoard); // X
 
 // const game2 = gameController(p1,p2);
 //  currentBoard = game2.start();
