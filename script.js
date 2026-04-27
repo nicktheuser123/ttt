@@ -58,6 +58,9 @@ const player = function (name, symbol) {
 
 const gameController = function (player1, player2) {
     let board;
+
+    let currentPlayer = player1;
+
     console.log("in gameController")
     const start = function (){        
         
@@ -66,6 +69,15 @@ const gameController = function (player1, player2) {
         gameboard.clearBoard(board);
         
         return board;
+    }
+
+    const switchTurns = function (currentPlayer){
+        if(currentPlayer.symbol==="X") {
+             
+        } else {
+
+        }
+
     }
 
     const checkWin = function (board,player){
@@ -177,14 +189,20 @@ const gameController = function (player1, player2) {
     return {start, turn, checkWin}
 }
 
-const screenController = (()=>{
+const screenController = (() => {
     
     const p1 = player("Ronny", "X");
     const p2 = player("Yotty", "O");
 
+    const currentPlayer = p1;
     const game1 = gameController(p1,p2);
     const currentBoard = game1.start();
     
+    const getPlayer = (symbol) => {
+
+
+
+    }
 
     const renderScreen = (board) => {
 
@@ -211,12 +229,13 @@ const screenController = (()=>{
         const button = document.createElement('button');
         button.classList.add(`cell`);
         // console.log("parent",parent)
-        button.setAttribute("data-id-x",x);
-        button.setAttribute("data-id-x",y);
+        button.setAttribute("data-x",x);
+        button.setAttribute("data-y",y);
         if(text) button.textContent = text; 
         if(parent) parent.appendChild(button);
         button.addEventListener('click', (e)=>{
-        game1.turn(p1, e.target.dataset.id , e.target.dataset.id, currentBoard);
+        game1.turn(p1, Number(e.target.dataset.x) , Number(e.target.dataset.y), currentBoard);
+
         })
         return button;
     }   
@@ -225,7 +244,7 @@ const screenController = (()=>{
 })()
 
 
-screenController()
+
 
 //diagonal top left to bot right
 // game1.turn(p1, 0, 0, currentBoard); // X
