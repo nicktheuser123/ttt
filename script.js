@@ -70,15 +70,7 @@ const gameController = function (player1, player2) {
         
         return board;
     }
-
-    const switchTurns = function (currentPlayer){
-        if(currentPlayer.symbol==="X") {
-             
-        } else {
-
-        }
-
-    }
+    
 
     const checkWin = function (board,player){
         let tie = true;
@@ -194,15 +186,20 @@ const screenController = (() => {
     const p1 = player("Ronny", "X");
     const p2 = player("Yotty", "O");
 
-    const currentPlayer = p1;
+    let currentPlayer = p1;
     const game1 = gameController(p1,p2);
     const currentBoard = game1.start();
     
-    const getPlayer = (symbol) => {
-
-
-
+    const switchTurns = (cPlayer) => {
+        console.log("C PLAYER",cPlayer);
+        if(cPlayer.symbol==="X") {
+             currentPlayer = p2
+        } else {
+            currentPlayer = p1
+        }
+        console.log("CURRENT PLAYER",currentPlayer);
     }
+
 
     const renderScreen = (board) => {
 
@@ -233,9 +230,10 @@ const screenController = (() => {
         button.setAttribute("data-y",y);
         if(text) button.textContent = text; 
         if(parent) parent.appendChild(button);
-        button.addEventListener('click', (e)=>{
-        game1.turn(p1, Number(e.target.dataset.x) , Number(e.target.dataset.y), currentBoard);
-
+        button.addEventListener('click', (e) => {
+        game1.turn(currentPlayer, Number(e.target.dataset.x) , Number(e.target.dataset.y), currentBoard);
+        e.target.textContent = currentPlayer.symbol;
+        switchTurns(currentPlayer);
         })
         return button;
     }   
