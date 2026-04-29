@@ -17,7 +17,7 @@ const gameboard = (() => {
     const getBoard = () => board;
     
     const clearBoard = (board) => {
-        // console.log("IN Clear Board p1 ", board );
+        console.log("IN Clear Board p1 ", board );
         board.length = 0;
         // console.log("IN Clear Board p2", board);
 
@@ -193,7 +193,7 @@ const screenController = (() => {
     const switchTurns = (cPlayer) => {
         console.log("C PLAYER",cPlayer);
         if(cPlayer.symbol==="X") {
-             currentPlayer = p2
+            currentPlayer = p2
         } else {
             currentPlayer = p1
         }
@@ -204,6 +204,7 @@ const screenController = (() => {
     const renderScreen = (board) => {
 
         const boardElement = document.getElementsByClassName("board-container")[0];
+        const actionsDiv = document.getElementsByClassName("actions")[0];
         // console.log(boardElement)
         for (let x = 0; x < 3; x++){
             const rowDiv = document.createElement('div');
@@ -216,6 +217,21 @@ const screenController = (() => {
             // console.log()
             boardElement.appendChild(rowDiv)
         }
+
+        const clearButton = document.createElement('button');
+        clearButton.classList.add('clear-board');
+        clearButton.textContent = "Clear Board"
+        clearButton.addEventListener('click', (e) =>{
+            // console.log("im clicked", currentBoard)
+            gameboard.clearBoard(currentBoard)
+            let cells = document.getElementsByClassName('cell');
+            for(cell of cells){
+                cell.textContent = " "
+            }
+            // console.log("im clicked2", game1)
+
+        })
+        actionsDiv.appendChild(clearButton)
 
     };
 
@@ -273,7 +289,7 @@ const screenController = (() => {
 
 /*
 Todo 
-add switch round logic, to change the players and then simplify check win logic
+
 
 dynamically generate UI with coordinate ids
 -event listeners on each button
