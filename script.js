@@ -1,4 +1,4 @@
-
+//Controls the gameboard
 const gameboard = (() => {
     let rows = 3;
     let columns = 3;
@@ -29,7 +29,9 @@ const gameboard = (() => {
 
 })();
 
+//Controls the player object
 const player = function (name, symbol) {
+    let name = name;
     let score = 0;    
     
     const getScore = () => score;
@@ -55,7 +57,6 @@ const player = function (name, symbol) {
 
 
 //Controls the turns, checks for wins etc
-
 const gameController = function (player1, player2) {
     let board;
 
@@ -181,6 +182,9 @@ const gameController = function (player1, player2) {
     return {start, turn, checkWin}
 }
 
+
+
+//Controls the UI and displays
 const screenController = (() => {
     
     const p1 = player("Ronny", "X");
@@ -258,43 +262,15 @@ const screenController = (() => {
 })()
 
 
-
-
-//diagonal top left to bot right
-// game1.turn(p1, 0, 0, currentBoard); // X
-// game1.turn(p2, 1, 1, currentBoard); // O
-// game1.turn(p1, 2, 0, currentBoard); // X
-// game1.turn(p2, 1, 0, currentBoard); // O
-// game1.turn(p1, 1, 2, currentBoard); // X
-// game1.turn(p2, 0, 1, currentBoard); // O
-// game1.turn(p1, 2, 1, currentBoard); // X
-// game1.turn(p2, 2, 2, currentBoard); // O
-// game1.turn(p1, 0, 2, currentBoard); // X
-
-// const game2 = gameController(p1,p2);
-//  currentBoard = game2.start();
- 
-//diagonal bot left to top right
-// game1.turn(p1, 0, 1, currentBoard);
-// game1.turn(p2, 2, 0, currentBoard);
-
-// game1.turn(p1, 2, 0, currentBoard);
-// game1.turn(p2, 1, 1, currentBoard);
-
-// game1.turn(p1, 2, 1, currentBoard);
-// game1.turn(p2, 0, 2, currentBoard);
-
-
-// console.log(board);
-
 /*
 Todo 
-
-
-dynamically generate UI with coordinate ids
--event listeners on each button
-Then when button is pressed, extract data attributes containing coordinates
-Then call the turn function
+- Allow players to put in their names
+- Display text that shows the user that needs to mark 
+- Display game results in UI
+- Start Game button
+- Logic that keeps players from playing in spots that are already taken!
+- Reread module pattern section and refactor Objects
+- Clean up UI Css
 
 nice to have
 
