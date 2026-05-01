@@ -31,7 +31,7 @@ const gameboard = (() => {
 
 //Controls the player object
 const player = function (name, symbol) {
-    let name = name;
+    let playerName = name;
     let score = 0;    
     
     const getScore = () => score;
@@ -51,7 +51,7 @@ const player = function (name, symbol) {
         }
     }
 
-    return {name, getScore, symbol, score, incrementScore, resetScore}
+    return {playerName, getScore, symbol, score, incrementScore, resetScore}
 }
 
 
@@ -272,6 +272,5 @@ Todo
 - Reread module pattern section and refactor Objects
 - Clean up UI Css
 
-nice to have
 
 */
