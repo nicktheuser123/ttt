@@ -265,6 +265,8 @@ const screenController = (() => {
 /*
 Todo 
 - Allow players to put in their names
+
+
 - Display text that shows the user that needs to mark 
 - Display game results in UI
 - Start Game button

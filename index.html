@@ -10,13 +10,26 @@
 <body>
     <div>
         <div class="p1">Player 1</div>
-        <button>Edit Name</button>
+        <button class="edit-name button" command="show-modal" commandfor="edit-name-dialog">Edit Name</button>
+
     </div>
     <div>
         <div class="p2">Player 2</div>
-        <button>Edit Name</button>
+        <button class="edit-name button" command="show-modal" commandfor="edit-name-dialog">Edit Name</button>
     </div>
+    <dialog id="edit-name-dialog">
+        <p>Edit Player Name</p>
+        <form action="" method="get">            
+            <div class="form-row-item">
+                <label for="name">Name</label>
+                <input type="text" id="input-title" name="name" required>
+            </div>
+        </form>
+        <div class="button-wrap">
+            <button class="close-button dlg button" commandfor="edit-name-dialog" command="close"></button>
+        </div>
 
+    </dialog>
     <div class="board-container">     
     </div>
     <div class="actions">        
