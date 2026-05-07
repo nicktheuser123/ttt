@@ -17,5 +17,9 @@
 }
 
 button{
+    padding: 5px;
+}
+
+.cell{
     padding: 40px;
 }

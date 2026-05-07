@@ -40,6 +40,7 @@ const player = function (name, symbol) {
         score = 0;
     }
 
+ 
 
     const incrementScore = (score) => {         
         console.log ("Inside Score increment",score);
@@ -50,6 +51,8 @@ const player = function (name, symbol) {
             resetScore(score);
         }
     }
+
+
 
     return {playerName, getScore, symbol, score, incrementScore, resetScore}
 }
@@ -190,6 +193,11 @@ const screenController = (() => {
     const p1 = player("Ronny", "X");
     const p2 = player("Yotty", "O");
 
+    const getPlayer = (symbol) => {
+        if(symbol==='X') return p1
+        if(symbol==='Y') return p2
+    }
+
     let currentPlayer = p1;
     const game1 = gameController(p1,p2);
     const currentBoard = game1.start();
@@ -202,6 +210,31 @@ const screenController = (() => {
             currentPlayer = p1
         }
         console.log("CURRENT PLAYER",currentPlayer);
+    }
+
+       //add listener for player name edits here
+    const editName = document.getElementsByClassName('edit-name')[0]
+
+    const editModal  = document.getElementById('edit-name-dialog')
+    editName.addEventListener('click', editClick);
+    editModal.addEventListener('click',saveName);
+
+    function editClick(event){
+        event.preventDefault();
+        console.log("EVENT",event)
+        const inputName = document.getElementById('input-name');
+        let currPlayer = getPlayer(event.srcElement.dataset.p);
+        // console.log("modal",editModal);
+        editModal.setAttribute("data-p",event.srcElement.dataset.p)
+
+        // player.name = 
+
+        //set data attribute for player and then get it while updating 
+
+    }
+
+    function saveName(event){
+        
     }
 
 
@@ -258,7 +291,7 @@ const screenController = (() => {
         return button;
     }   
 
-
+    return { getPlayer}
 })()
 
 
