@@ -40,10 +40,15 @@ const player = function (name, symbol) {
         score = 0;
     }
 
- 
+    const updateName = (newName) => {
+        playerName = newName;
+        console.log("PlayerName",playerName);
+
+    }
+
 
     const incrementScore = (score) => {         
-        console.log ("Inside Score increment",score);
+        console.log ("Inside Score increment", score);
         score++
 
         if(score === 3) {
@@ -54,7 +59,7 @@ const player = function (name, symbol) {
 
 
 
-    return {playerName, getScore, symbol, score, incrementScore, resetScore}
+    return {playerName, updateName, getScore, symbol, score, incrementScore, resetScore}
 }
 
 
@@ -216,25 +221,37 @@ const screenController = (() => {
     const editName = document.getElementsByClassName('edit-name')[0]
 
     const editModal  = document.getElementById('edit-name-dialog')
+
+    const saveName = document.getElementsByClassName('submit-button')[0];
+
     editName.addEventListener('click', editClick);
-    editModal.addEventListener('click',saveName);
+    saveName.addEventListener('click',saveNameBtn);
 
     function editClick(event){
-        event.preventDefault();
-        console.log("EVENT",event)
-        const inputName = document.getElementById('input-name');
-        let currPlayer = getPlayer(event.srcElement.dataset.p);
+        // event.preventDefault();
+        console.log("EVENT",event)                
         // console.log("modal",editModal);
-        editModal.setAttribute("data-p",event.srcElement.dataset.p)
-
-        // player.name = 
-
-        //set data attribute for player and then get it while updating 
-
+        let symb = event.srcElement.dataset.p;
+        saveName.setAttribute("data-p",symb)
+                    
+        
+        
     }
 
-    function saveName(event){
+    function saveNameBtn(event){
+        event.preventDefault()
+        const inputNameValue = document.getElementById('input-name').value;
+        let symb = event.srcElement.dataset.p;
+        console.log(symb,"SYMB");
+        let currPlayer = getPlayer(symb);
+        console.log(currPlayer, "Current player");
         
+        currPlayer.playerName = inputNameValue; 
+        // currPlayer.updateName(inputNameValue);
+        console.log(currPlayer, "Current player");
+        let displayDiv = document.querySelector(`.player-text-display[data-p=${symb}]`);
+        displayDiv.textContent = currPlayer.playerName;
+        //resume player name not updating in the current player object
     }
 
 
