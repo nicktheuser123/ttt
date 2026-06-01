@@ -200,7 +200,7 @@ const screenController = (() => {
 
     const getPlayer = (symbol) => {
         if(symbol==='X') return p1
-        if(symbol==='Y') return p2
+        if(symbol==='O') return p2
     }
 
     let currentPlayer = p1;
@@ -222,9 +222,11 @@ const screenController = (() => {
 
     const editModal  = document.getElementById('edit-name-dialog')
 
+    const editName2 = document.getElementsByClassName('edit-name')[1]
     const saveName = document.getElementsByClassName('submit-button')[0];
 
     editName.addEventListener('click', editClick);
+    editName2.addEventListener('click', editClick);
     saveName.addEventListener('click',saveNameBtn);
 
     function editClick(event){
@@ -314,9 +316,6 @@ const screenController = (() => {
 
 /*
 Todo 
-- Allow players to put in their names
-
-
 - Display text that shows the user that needs to mark 
 - Display game results in UI
 - Start Game button
