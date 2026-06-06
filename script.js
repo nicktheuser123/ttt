@@ -50,10 +50,18 @@ const player = function (name, symbol) {
     const incrementScore = (score) => {         
         console.log ("Inside Score increment", score);
         score++
-
-        if(score === 3) {
+        let currentPlayerDisplay = document.getElementById('currentPlayer')
+        
+        
+        
+            if(score === 3) {
             console.log ("Game Complete")
+            
+                currentPlayerDisplay.textContent = `This mf WON GAME OVER ${playerName}`;
             resetScore(score);
+        } else {
+            currentPlayerDisplay.textContent = `This mf WON the point ${playerName}`;
+
         }
     }
 
@@ -84,9 +92,16 @@ const gameController = function (player1, player2) {
     const checkWin = function (board,player){
         let tie = true;
         console.log("Inside checkWin", board);
+        let win = false
+        if (checkRow("X", board) || checkCol("X", board) || checkDiagonal("X", board)) {
+            win = true;
+            player.incrementScore(player.getScore())}
+
+         if (checkRow("O", board) || checkCol("O", board) || checkDiagonal("O", board))
+            {
+            win = true;
+            player.incrementScore(player.getScore())}                    
         
-         if (checkRow("X", board) || checkCol("X", board) || checkDiagonal("X", board)) player.incrementScore(player.getScore())
-         if (checkRow("O", board) || checkCol("O", board) || checkDiagonal("O", board)) player.incrementScore(player.getScore())
          
          for (let x = 0; x < 3; x++){            
             for(let y = 0; y < 3; y++){
@@ -96,8 +111,15 @@ const gameController = function (player1, player2) {
             }        
         }
 
-        if(tie) console.log("TIE");
-
+        if(tie) { console.log("TIE");
+            win = false
+        }
+        console.log("WINNNNŃ", win);
+        if (win) {
+            console.log("FFFFFFFFF")
+            let currentPlayerDisplay = document.getElementById('winner')
+                currentPlayerDisplay.textContent = `This mf WON GAME OVER ${player.playerName}`;
+        }
     }
 
     const checkRow = function (symbol,board) {
@@ -113,13 +135,13 @@ const gameController = function (player1, player2) {
                            
             }
             if (i === 3){                
-                win = true;
-                console.log("YOU WON")
+               return win = true;
+                console.log("YOU WON")         
                 break;
             }                 
 
         };
-
+      
     };
 
     const checkCol = function (symbol,board) {
@@ -144,7 +166,7 @@ const gameController = function (player1, player2) {
 
         }
 
-        
+        return win;
     };
 
     const checkDiagonal = function (symbol, board) {
@@ -157,7 +179,7 @@ const gameController = function (player1, player2) {
             if (board[x][x][0] === symbol) i++;                                    
         }
         
-        if (i===3){
+        if (i===3){            
             console.log(`YOU WON!!!!!!!!! ${symbol}`);
             return true                                                          
         }
@@ -172,11 +194,12 @@ const gameController = function (player1, player2) {
             y--
         }
             
-        if (i===3){
+        if (i===3){            
               console.log(`YOU WON!!!!!!!!! ${symbol}`);
               return true                                          
             }                               
         
+            return win;
     };
 
     const turn = function (player, positionX, positionY, board){
@@ -214,6 +237,8 @@ const screenController = (() => {
         } else {
             currentPlayer = p1
         }
+        let currentPlayerDisplay = document.getElementById('currentPlayer')
+        currentPlayerDisplay.textContent = `This mf TURN ${currentPlayer.playerName}`;
         console.log("CURRENT PLAYER",currentPlayer);
     }
 
@@ -312,16 +337,3 @@ const screenController = (() => {
 
     return { getPlayer}
 })()
-
-
-/*
-Todo 
-- Display text that shows the user that needs to mark 
-- Display game results in UI
-- Start Game button
-- Logic that keeps players from playing in spots that are already taken!
-- Reread module pattern section and refactor Objects
-- Clean up UI Css
-
-
-*/
